@@ -1,0 +1,25 @@
+{
+  "name": "demo1_3-8-2022",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trung9901/lab-Nodejs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trung9901/lab-Nodejs/issues"
+  },
+  "homepage": "https://github.com/trung9901/lab-Nodejs#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "expresss": "^0.0.0",
+    "nodemon": "^2.0.15"
+  }
+}
