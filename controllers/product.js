@@ -1,10 +1,7 @@
-// const products = [
-//     { id: 1, name: "Product A" }, // item
-//     { id: 2, name: "Product B" } // item
-// ];
-import mongoose from "mongoose";
-const Product = mongoose.model('Product', { name: String, price: Number, description: String, quantity: Number });
 
+// import mongoose from "mongoose";
+// const Product = mongoose.model('Product', { name: String, price: Number, description: String, quantity: Number, image: String });
+import Product from "../models/product"
 // API list sản phẩm
 export const list = async (req, res) => {
     try {

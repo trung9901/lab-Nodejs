@@ -1,7 +1,7 @@
 
-import mongoose from "mongoose";
-// 1 Khởi tạo model
-const Post = mongoose.model('Post', { name: String, title: String, image: String, content: String });
+// import mongoose from "mongoose";
+// // 1 Khởi tạo model
+// const Post = mongoose.model('Post', { name: String, title: String, image: String, content: String });
 
 // API list sản phẩm
 export const list = async (req, res) => {
