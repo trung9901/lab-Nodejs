@@ -17,8 +17,9 @@ export const list = async (req, res) => {
     }
 }
 export const read = async (req, res) => {
+    const filter = { _id: req.params.id }
     try {
-        const product = await Product.findById(req.params.id);
+        const product = await Product.findOne(filter);
         res.json(product);
     } catch (error) {
         res.status(400).json({
@@ -41,8 +42,9 @@ export const create = async (req, res) => {
 
 // API xóa sản phẩm
 export const remove = async (req, res) => {
+    const conditions = { _id: req.params.id }
     try {
-        const product = await Product.findByIdAndRemove(req.params.id);
+        const product = await Product.findOneAndDelete(conditions);
         res.json(product);
     } catch (error) {
         res.status(400).json({
@@ -52,8 +54,11 @@ export const remove = async (req, res) => {
     // res.json(products.filter(item => item.id !== +req.params.id));
 }
 export const update = async (req, res) => {
+    const conditions = { _id: req.params.id }
+    const doc = req.body
+    const options = { new: true }
     try {
-        const product = await Product.findByIdAndUpdate(req.params.id, req.body);
+        const product = await Product.findByIdAndUpdate(conditions, doc, options);
         res.json(product);
     } catch (error) {
         res.status(400).json({
