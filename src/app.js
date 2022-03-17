@@ -5,6 +5,7 @@ import mongoose from 'mongoose'
 // router
 import productRoute from '../routes/product';
 import postRouter from '../routes/post'
+import categoryRoute from '../routes/category';
 
 const app = express();
 // middleware
@@ -14,12 +15,13 @@ app.use(express.json())
 //route
 app.use("/api", postRouter);
 app.use("/api", productRoute);
+app.use("/api", categoryRoute)
 //connectdatabase
 mongoose.connect('mongodb://localhost:27017/nodejs')
     .then(() => console.log("connection db succeeded"))
     .catch((error) => console.log(error))
 //connection
-const PORT = 3001;
+const PORT = 8000;
 app.listen(PORT, () => {
     console.log("Server is running port", PORT);
 })
