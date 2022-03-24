@@ -1,8 +1,6 @@
-import mongoose, { Schema } from "mongoose"
-import { createHmac } from "crypto"
-import { v4 as uuidv4 } from "uuid"
-
-const userSchema = new UserSchema({
+import mongoose, { Schema } from "mongoose";
+import { createHmac } from 'crypto';
+const userSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -13,7 +11,7 @@ const userSchema = new UserSchema({
         required: true
     },
     salt: {
-        type: String,
+        type: String
     },
     password: {
         type: String,
@@ -23,25 +21,20 @@ const userSchema = new UserSchema({
 
 userSchema.methods = {
     authenticate(password) {
-        return this.encryptPassword(password) == this.password;
+        return this.password == this.encrytPassword(password);
     },
-    encryptPassword(password) {
-        if (!password) return;
+    encrytPassword(password) {
+        if (!password) return
         try {
-            return createHmac('sha256', this.salt).update(password).digest('hex');
+            return createHmac("sha256", "1234").update(password).digest("hex");
         } catch (error) {
             console.log(error)
         }
     }
 }
-userSchema.pre("save", async function save(next) {
-    try {
-        this.salt = uuidv4();
-        this.password = this.encryptPassword(this.password);
-        return next();
-    } catch (error) {
-        return next(error)
-    }
-});
-
+// trước khi execute .save() thì chạy middleware sau.
+userSchema.pre("save", function (next) {
+    this.password = this.encrytPassword(this.password);
+    next();
+})
 export default mongoose.model('User', userSchema);
