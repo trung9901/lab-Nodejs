@@ -5,10 +5,10 @@ import { checkAuth, isAdmin, isAuth, requireSignin } from '../middlewares/checkA
 const router = Router();
 
 // resful API
-router.get('/products', checkAuth, list);
-router.get('/products/:id', checkAuth, read);
+router.get('/products', list);
+router.get('/products/:id', read);
 router.post('/products/:userId', requireSignin, isAuth, isAdmin, create);
-router.delete('/products/:id', checkAuth, remove);
-router.put("/products/:id", checkAuth, update)
+router.delete('/products/:userId/:id', requireSignin, isAuth, isAdmin, remove);
+router.put("/products/:userId/:id", requireSignin, isAuth, isAdmin, update)
 router.param("userId", userById);
 export default router;
