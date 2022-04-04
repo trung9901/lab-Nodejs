@@ -1,13 +1,13 @@
-import { Router } from 'express';
-import { create, read, remove, update, list } from '../controllers/category';
-import { checkAuth } from '../middlewares/checkAuth'
+import { Router } from "express";
+import { list, post, read, remove, update } from "../controllers/category";
+import { userById } from "../controllers/user";
+import { checkAuth, isAuth, isAdmin, requireSignin } from "../middlewares/checkAuth";
 const router = Router();
 
-// resful API
-// router.get('/categories', checkAuth, list);
-router.post("/category", create);
-router.get("/category/:id", read);
-// router.delete('/category/:id', checkAuth, remove);
-// router.put("/category/:id", checkAuth, update)
-
+router.get('/categories', checkAuth, list)
+router.get('/categories/:id', checkAuth, read)
+router.post('/categories/:userId', requireSignin, isAuth, isAdmin, post)
+router.put('/categories/:userId/:id', checkAuth, update)
+router.delete('/categories/:userId/:id', checkAuth, remove)
+router.param('userId', userById)
 export default router;

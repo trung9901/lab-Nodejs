@@ -1,50 +1,58 @@
-import Category from '../models/category';
-import Product from '../models/product';
-
-export const create = async (req, res) => {
+import Category from "../models/category";
+export const list = async (req, res) => {
     try {
-        const category = await new Category(req.body).save()
-        res.json(category);
+        const ListCategory = await Category.find();
+        res.json(ListCategory);
     } catch (error) {
-        res.status(400).json({error})
-    }
-}
-
-export const read = async ( req, res) => {
-    try {
-        const category = await Category.findOne({_id: req.params.id}).exec();
-        const products = await Product.find({category}).select("-category").exec();
-        res.json({
-            category,
-            products
+        res.status(400).json({
+            message: "Không tìm được sản phẩm anh eiii"
         })
-    } catch (error) {
-        
     }
-}
 
-export const remove = async (req, res) => {
-    const conditions = { _id: req.params.id }
+}
+// thêm sản phẩm
+export const post = async (req, res) => {
     try {
-        const category = await Category.findOneAndDelete(conditions);
+        const category = await new Category(req.body).save();
         res.json(category);
     } catch (error) {
         res.status(400).json({
-            message: "Lỗi không tìm được sản phẩm"
+            message: "Không thêm được sản phẩm"
         })
     }
-   
+
 }
+//update 
 export const update = async (req, res) => {
-    const conditions = { _id: req.params.id }
-    const doc = req.body
-    const options = { new: true }
     try {
-        const category = await Category.findByIdAndUpdate(conditions, doc, options);
+        const UpdateCategory = await Category.findByIdAndUpdate(req.params.id, req.body)
+        res.json(UpdateCategory);
+    } catch (error) {
+        res.status(400).json({
+            message: "Không tìm được sản phẩm anh eiii"
+        })
+    }
+
+}
+//
+export const read = async (req, res) => {
+    try {
+        const category = await Category.findById(req.params.id);
         res.json(category);
     } catch (error) {
         res.status(400).json({
-            message: "Lỗi không tìm được sản phẩm"
+            message: "Không tìm được sản phẩm anh eiii"
+        })
+    }
+
+}
+export const remove = async (req, res) => {
+    try {
+        const removeCategory = await Category.findByIdAndDelete(req.params.id)
+        res.json(removeCategory);
+    } catch (error) {
+        res.status(400).json({
+            message: "Không tìm được sản phẩm anh eiii"
         })
     }
 

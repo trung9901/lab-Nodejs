@@ -1,68 +1,58 @@
-
-// import mongoose from "mongoose";
-// // 1 Khởi tạo model
-// const Post = mongoose.model('Post', { name: String, title: String, image: String, content: String });
-
-// API list sản phẩm
+import Post from "../models/post";
 export const list = async (req, res) => {
     try {
-        const posts = await Post.find();
-        res.json(posts);
+        const ListPost = await Post.find();
+        res.json(ListPost);
     } catch (error) {
         res.status(400).json({
-            message: "Lỗi không tìm được sản phẩm"
+            message: "Không tìm được sản phẩm anh eiii"
         })
     }
+
 }
-// API tim sản phẩm
-export const read = async (req, res) => {
-    const filter = { _id: req.params.id }
+// thêm sản phẩm
+export const post = async (req, res) => {
     try {
-        const post = await Post.findOne(filter);
+        const post = await new Post(req.body).save();
         res.json(post);
     } catch (error) {
         res.status(400).json({
-            message: "Lỗi không tìm được sản phẩm"
-        })
-    }
-}
-
-// API thêm sản phẩm
-export const create = async (req, res) => {
-    try {
-        const posts = await new Post(req.body).save()
-        res.json(posts);
-
-    } catch (error) {
-        res.status(400).json({ message: "khong them duoc san pham" })
-    }
-
-}
-
-// API xóa sản phẩm
-export const remove = async (req, res) => {
-    const condition = { _id: req.params.id }
-    try {
-        const post = await Post.findOneAndDelete(condition);
-        res.json(post);
-    } catch (error) {
-        res.status(400).json({
-            message: "Lỗi không tìm được sản phẩm"
+            message: "Không thêm được sản phẩm"
         })
     }
 
 }
-// API cập nhật sản phẩm
+//update 
 export const update = async (req, res) => {
-    const condition = { _id: req.params.id };
-    const doc = req.body;
-    const option = { new: true };
     try {
-        const post = await Post.findOneAndUpdate(condition, doc, option);
+        const Updatepost = await Post.findByIdAndUpdate(req.params.id, req.body)
+        res.json(Updatepost);
+    } catch (error) {
+        res.status(400).json({
+            message: "Không tìm được sản phẩm anh eiii"
+        })
+    }
+
+}
+//
+export const read = async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
         res.json(post);
     } catch (error) {
         res.status(400).json({
-            message: "Lỗi không tìm được sản phẩm"
+            message: "Không tìm được sản phẩm anh eiii"
+        })
+    }
+
+}
+export const remove = async (req, res) => {
+    try {
+        const removePost = await Post.findByIdAndDelete(req.params.id)
+        res.json(removePost);
+    } catch (error) {
+        res.status(400).json({
+            message: "Không tìm được sản phẩm anh eiii"
         })
     }
 

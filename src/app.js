@@ -7,6 +7,7 @@ import productRoute from '../routes/product';
 import postRouter from '../routes/post'
 import categoryRoute from '../routes/category';
 import authRoute from '../routes/auth'
+import UsersRoute from '../routes/user';
 const app = express();
 // middleware
 app.use(cors());
@@ -17,6 +18,7 @@ app.use("/api", postRouter);
 app.use("/api", productRoute);
 app.use("/api", categoryRoute);
 app.use("/api", authRoute);
+app.use('/api', UsersRoute)
 //connectdatabase
 mongoose.connect('mongodb://localhost:27017/nodejs')
     .then(() => console.log("connection db succeeded"))

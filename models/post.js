@@ -1,20 +1,19 @@
-import mongoose, { Schema } from 'mongoose';
-const postSchema = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
+import mongoose from "mongoose";
+const postSchema = new mongoose.Schema({
     title: {
+        required: true,
+        minlength: 5,
         type: String,
-        required: true
+        unique: true
     },
-    image: {
-        type: String,
-        required: true
+    img: {
+        required: true,
+        type: String
     },
     content: {
-        type: String,
-        required: true
+        required: true,
+        type: String
     }
-})
-export default mongoose.model('Post', productSchema)
+}, { timestamps: true })
+
+export default mongoose.model('post', postSchema)
