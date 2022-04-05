@@ -7,7 +7,7 @@ const router = Router();
 router.get('/posts', checkAuth, list)
 router.get('/posts/:id', checkAuth, read)
 router.post('/posts/:userId', requireSignin, isAuth, isAdmin, post)
-router.put('/posts/:userId/:id', checkAuth, update)
-router.delete('/posts/:userId/:id', checkAuth, remove)
+router.put('/posts/:userId/:id', requireSignin, isAuth, isAdmin, update)
+router.delete('/posts/:userId/:id', requireSignin, isAuth, isAdmin, remove)
 router.param('userId', userById)
 export default router;
