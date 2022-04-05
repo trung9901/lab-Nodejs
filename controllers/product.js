@@ -64,3 +64,11 @@ export const update = async (req, res) => {
     }
     // res.json(products.map(item => item.id == req.params.id ? req.body : item));
 }
+
+export const search = async(req, res) => {
+    console.log(req.query);
+    const searchString = req.query.q ? req.query.q : "";
+
+    const result = await Product.find({ $text: { $search: searchString } }).exec();
+    res.json(result)
+}
