@@ -6,6 +6,12 @@ const productSchema = new Schema({
         required: true,
         unique: true
     },
+    slug: {
+        type: String,
+        lowercase: true,
+        unique: true,
+        index: true
+    },
     price: {
         type: Number,
         required: true
