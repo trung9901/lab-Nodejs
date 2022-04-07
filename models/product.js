@@ -1,39 +1,27 @@
-import mongoose, { Schema, ObjectId } from 'mongoose';
+import mongoose from "mongoose";
+import { Schema, ObjectId } from "mongoose";
 
 const productSchema = new Schema({
     name: {
         type: String,
-        minLength: 5,
         required: true,
-        unique: true
     },
-    // slug: {
-    //     type: String,
-    //     lowercase: true,
-    //     unique: true,
-    //     index: true
-    // },
-    price: {
-        type: Number,
-        required: true
-    },
-    description: {
+    slug: {
         type: String,
-        required: true
+        lowercase: true,
+        unique: true,
+        index: true
     },
-    // image: {
-    //     type: String,
-    //     required: true
-    // },
-    quantity: {
+    price: {
         type: Number,
         required: true
     },
     category: {
         type: ObjectId,
-        ref: "category"
+        ref: "Category"
     }
 
 }, { timestamps: true })
 productSchema.index({ "$**": 'text' });
-export default mongoose.model('Product', productSchema)
+
+export default mongoose.model('Product', productSchema);

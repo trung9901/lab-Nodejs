@@ -1,6 +1,3 @@
-
-// import mongoose from "mongoose";
-// const Product = mongoose.model('Product', { name: String, price: Number, description: String, quantity: Number, image: String });
 import Product from "../models/product"
 // API list sản phẩm
 export const list = async (req, res) => {
@@ -32,7 +29,7 @@ export const create = async (req, res) => {
         res.json(product);
 
     } catch (error) {
-        res.status(400).json({ message: "khong them duoc san pham" })
+        res.status(400).json({ message: "không thêm được sản phẩm" })
     }
 
 }
@@ -65,7 +62,7 @@ export const update = async (req, res) => {
     // res.json(products.map(item => item.id == req.params.id ? req.body : item));
 }
 
-export const search = async(req, res) => {
+export const search = async (req, res) => {
     console.log(req.query);
     const searchString = req.query.q ? req.query.q : "";
 
