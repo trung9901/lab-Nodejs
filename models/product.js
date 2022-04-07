@@ -16,6 +16,14 @@ const productSchema = new Schema({
         type: Number,
         required: true
     },
+    quantity: {
+        type: Number,
+        required: true
+    },
+    description: {
+        type: String,
+
+    },
     category: {
         type: ObjectId,
         ref: "Category"
