@@ -59,7 +59,7 @@ export const update = async (req, res) => {
             message: "Lỗi không tìm được sản phẩm"
         })
     }
-    // res.json(products.map(item => item.id == req.params.id ? req.body : item));
+
 }
 
 export const search = async (req, res) => {
